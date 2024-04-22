@@ -24,7 +24,7 @@ exports.getTodos = async (req, res) => {
 //get single product
 exports.getTodoById = async (req, res) => {
     try{
-        const todoId = req.params.todoId
+        const todoId = req.params.id
         const todo = await Todo.findById(todoId)
         if(!todo){
             return res.status(404).send({ message: "Product not found" })
@@ -40,7 +40,7 @@ exports.getTodoById = async (req, res) => {
 exports.deleteTodo = async (req, res) => {
     try{
         await Todo.findByIdAndDelete(req.params.id)
-        res.status(200).send({ message: `Product @{req.params.id} deleted`})
+        res.status(200).send({ message: `Product id: ${req.params.id} deleted`})
     } catch(error){
         res.status(500).send({ message: "Something went wrong when trying to delete a todo"})
     }
